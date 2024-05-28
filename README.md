@@ -121,7 +121,47 @@ The password for the next level is stored in the file data.txt, which is a hexdu
 
 The ```-r switch of xxd``` convert an hexdump to binary. Then we use the ```file``` command to find out which compression tool has been used and recursively decompress the files with the right tool.
 
+### Level 13->14
 
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level.
+
+![b13](https://github.com/m3mphy/m3mphy/assets/146635397/55d0eb9b-696d-4550-8e94-0f2ef2ef0441)
+
+![b13 1](https://github.com/m3mphy/m3mphy/assets/146635397/ff950e89-68f6-4985-8bf6-3642ec8f36dc)
+
+Here we used ```scp``` command to download the key in the local machine and then we run the ```ssh``` with ```-i``` switch for the key file. From here we get the access to the next level.
+
+### Level 14->15
+
+The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+
+![b14](https://github.com/m3mphy/m3mphy/assets/146635397/b9a39b3e-52c7-4e75-85cf-4e8efeba0724)
+
+Simply entering the password on the localhost server of port 30000, we get the password for the next level.
+
+### Level 15->16
+
+The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
+
+![b15](https://github.com/m3mphy/m3mphy/assets/146635397/0e25dd75-3e7c-4cf4-a951-e4c46f4efe06)
+
+![b15 1](https://github.com/m3mphy/m3mphy/assets/146635397/9aaeafe0-65d7-4a57-811c-143d09c0308d)
+
+We can access the password for next level with two ways shown.
+
+### Level 16->17
+
+The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+
+![b16](https://github.com/m3mphy/m3mphy/assets/146635397/fff3e200-c9d5-41ee-b4a3-f61ade4a2fc9)
+
+![b16 1](https://github.com/m3mphy/m3mphy/assets/146635397/c382b040-a8c3-45b5-b7aa-9ee07cbf9640)
+
+![b16 2](https://github.com/m3mphy/m3mphy/assets/146635397/050b45b4-a26f-448a-b35a-370a164061c3)
+
+After scanning the ports using ```nmap```, we'll find which of the ports are open and then using ssl, we connect to the ports and check for the next level credentials by passing passwords of the current level. After getting the key, we'll save it and then run ```chmod 777``` on the key and connect it using ssh.
+
+### Level 17->18
 
 
 
